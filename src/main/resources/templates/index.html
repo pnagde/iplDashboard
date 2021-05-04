@@ -49,12 +49,22 @@
             margin-top: 5%;
         }
     </style>
+    <script type="text/javascript">
+        function clearSearch() {
+            window.location = "[[@{/}]]";
+        }
+    </script>
 </head>
 
 <body>
     <div style="text-align: center;">
         <h1 style="color: crimson;">IPL Dashboard</h1>
         <nav><a href="add" th:href="@{/add}">Add Teams</a></nav>
+        <form th:action="@{/}" method="POST">
+            Filter: <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required /> &nbsp;
+            <input type="submit" value="Search" /> &nbsp;
+            <input type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
+        </form>
     </div>
     <div style="display: flex;justify-content: center;">
         <table>

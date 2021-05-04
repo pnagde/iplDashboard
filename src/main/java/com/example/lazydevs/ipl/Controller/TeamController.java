@@ -7,6 +7,7 @@ import com.example.lazydevs.ipl.Service.TeamService;
 import com.example.lazydevs.ipl.modal.Team;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,6 +46,15 @@ public class TeamController
         ModelAndView modelAndView=new ModelAndView("add");
         List<Team> team=(List<Team>)repository.findAll();
         modelAndView.addObject("teams", team);
+        return modelAndView;
+    }
+
+    @RequestMapping(path = "/" ,method = RequestMethod.POST)
+    public ModelAndView search(@Param ("keyword") String keyword){
+        ModelAndView modelAndView=new ModelAndView("/");
+        List<Team> listProducts = service.ListAll(keyword);
+        modelAndView.addObject("listProducts", listProducts);
+        modelAndView.addObject("keyword", keyword);
         return modelAndView;
     }
 

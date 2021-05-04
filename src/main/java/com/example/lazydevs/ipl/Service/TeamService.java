@@ -14,6 +14,13 @@ public class TeamService {
     @Autowired
     private TeamRepository teamRepository;
     
+    public List<Team> ListAll(String keyword){
+        if (keyword != null) {
+            return teamRepository.search(keyword);
+        }
+        return teamRepository.findAll();
+    }
+
     public List<Team> findAll(){
         return teamRepository.findAll();
     }
