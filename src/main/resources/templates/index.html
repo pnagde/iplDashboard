@@ -47,11 +47,20 @@
         
         nav {
             margin-top: 5%;
+            margin-bottom: 10px;
         }
     </style>
     <script type="text/javascript">
+        var found = "[[${teams}]]";
+
         function clearSearch() {
             window.location = "[[@{/}]]";
+        }
+
+        function search() {
+            if (found == "null") {
+                document.getElementById("nofound").innerText("NO found");
+            }
         }
     </script>
 </head>
@@ -60,8 +69,10 @@
     <div style="text-align: center;">
         <h1 style="color: crimson;">IPL Dashboard</h1>
         <nav><a href="add" th:href="@{/add}">Add Teams</a></nav>
+    </div>
+    <div>
         <form th:action="@{/}" method="POST">
-            Filter: <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required /> &nbsp;
+            <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" onclick="search()" required /> &nbsp;
             <input type="submit" value="Search" /> &nbsp;
             <input type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
         </form>

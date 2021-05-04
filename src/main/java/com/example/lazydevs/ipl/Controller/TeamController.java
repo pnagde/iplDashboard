@@ -51,9 +51,9 @@ public class TeamController
 
     @RequestMapping(path = "/" ,method = RequestMethod.POST)
     public ModelAndView search(@Param ("keyword") String keyword){
-        ModelAndView modelAndView=new ModelAndView("/");
-        List<Team> listProducts = service.ListAll(keyword);
-        modelAndView.addObject("listProducts", listProducts);
+        ModelAndView modelAndView=new ModelAndView("index");
+        List<Team> teams = service.ListAll(keyword);
+        modelAndView.addObject("teams", teams);
         modelAndView.addObject("keyword", keyword);
         return modelAndView;
     }
@@ -73,7 +73,7 @@ public class TeamController
     @RequestMapping(path = "/edit/{id}")
     public ModelAndView edit(@PathVariable(name = "id") Integer id ) {
         ModelAndView modelAndView=new ModelAndView("edit");
-        if(id>0){
+        if(id>=0){
             Team team=service.get(id);
             modelAndView.addObject("team",team);
         }
