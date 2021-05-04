@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        
+        th {
+            padding: 10px;
+            text-align: center;
+        }
+        
+        tr {
+            padding: 10px;
+            text-align: center;
+        }
+        
+        td {
+            background-color: aliceblue;
+            padding: 5px;
+        }
+        
+        table {
+            border: 2px;
+            border-color: black;
+            padding: 16px;
+            background-color: cornflowerblue;
+            border-style: dashed;
+            margin-top: 3%;
+        }
+        
+        a {
+            text-decoration: none;
+            color: crimson;
+            border-radius: 5px;
+            padding: 5px;
+            background-color: darkgray;
+        }
+        
+        nav {
+            margin-top: 5%;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="text-align: center;">
+        <h1 style="color: crimson;">IPL Dashboard</h1>
+        <nav><a href="add" th:href="@{/add}">Add Teams</a></nav>
+    </div>
+    <div style="display: flex;justify-content: center;">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Team Name</th>
+                <th>Total Matches</th>
+                <th>Wins</th>
+                <th>Losses</th>
+                <th>NRR</th>
+                <th>Points</th>
+            </tr>
+            <tr th:each="team:${teams}">
+                <td th:text="${team.teamId}"></td>
+                <td th:text="${team.teamName}"></td>
+                <td th:text="${team.totalMatch}"></td>
+                <td th:text="${team.teamWin}"></td>
+                <td th:text="${team.teamLoss}"></td>
+                <td th:text="${team.nrr}"></td>
+                <td th:text="${team.points}"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

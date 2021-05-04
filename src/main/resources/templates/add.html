@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add teams</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        
+        th {
+            padding: 10px;
+            text-align: center;
+        }
+        
+        tr {
+            padding: 10px;
+            text-align: center;
+        }
+        
+        td {
+            background-color: aliceblue;
+            padding: 5px;
+        }
+        
+        table {
+            display: flex;
+            justify-content: center;
+            border: 2px;
+            width: 100%;
+            border-color: black;
+            background-color: cornflowerblue;
+            border-style: dashed;
+            margin-top: 20px;
+        }
+        
+        td {
+            padding: 5px;
+        }
+        
+        a {
+            text-decoration: none;
+            color: crimson;
+            border-radius: 5px;
+            padding: 5px;
+            margin: 2px;
+            background-color: darkgray;
+        }
+        
+        nav {
+            margin-top: 5%;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        input {
+            cursor: pointer;
+            padding: 5px;
+            border: none;
+            border-radius: 5px;
+            margin: 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <nav class="text-center"><a th:href="@{/}">Dashboard</a></nav>
+    </div>
+    <form th:objects="${team}" th:action="@{/addteams}" method="GET" action="#">
+        <table>
+            <tr>
+                <th>Team ID</th>
+                <th>Team Name</th>
+                <th>Total Matches</th>
+                <th>Wins</th>
+                <th>Losses</th>
+                <th>NRR</th>
+                <th>Points</th>
+            </tr>
+            <tr>
+                <td><input type="text" name="teammId" placeholder="Team ID" required></td>
+                <td><input type="text" name="teamName" placeholder="Team Name" required></td>
+                <td><input type="number" name="totalMatch" placeholder="Total Matches" required></td>
+                <td><input type="number" name="teamWin" placeholder="Team Wins" required></td>
+                <td><input type="number" name="teamLoss" placeholder="Team Losses" required></td>
+                <td><input type="number" name="nrr" placeholder="Team NRR" required></td>
+                <td><input type="number" name="points" placeholder="Team Points" required></td>
+                <td><input type="submit" value="Add Team"></td>
+            </tr>
+        </table>
+    </form>
+    <div style="display: flex;justify-content: center;margin-bottom: 10px;">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Team Name</th>
+                <th>Total Matches</th>
+                <th>Wins</th>
+                <th>Losses</th>
+                <th>NRR</th>
+                <th>Points</th>
+                <th colspan="2">Actions</th>
+            </tr>
+            <tr th:each="team:${teams}">
+                <td th:text="${team.teamId}"></td>
+                <td th:text="${team.teamName}"></td>
+                <td th:text="${team.totalMatch}"></td>
+                <td th:text="${team.teamWin}"></td>
+                <td th:text="${team.teamLoss}"></td>
+                <td th:text="${team.nrr}"></td>
+                <td th:text="${team.points}"></td>
+                <th colspan="2">
+                    <form th:action="@{'/edit/'+${team.teamId}}" th:method="GET">
+                        <input type="submit" value="Edit">
+                    </form>
+                    <form th:action="@{'/delete/'+${team.teamId}}" th:method="GET">
+                        <input type="submit" value="Delete">
+                    </form>
+                </th>
+            </tr>
+        </table>
+    </div>
+
+</body>
+
+</html>
