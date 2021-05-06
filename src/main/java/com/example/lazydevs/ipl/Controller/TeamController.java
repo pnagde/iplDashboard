@@ -35,6 +35,11 @@ public class TeamController
         modelAndView.addObject("teams", team);
         return modelAndView;
     }
+    @RequestMapping( path =  "/upload")
+    public ModelAndView upload(){
+        ModelAndView modelAndView=new ModelAndView("upload");
+        return modelAndView;
+    }
 
     @GetMapping(path = "/api/teams")
     public @ResponseBody Iterable<Team> teams(){

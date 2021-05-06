@@ -22,6 +22,13 @@
             padding: 10px;
             text-align: center;
         }
+
+button.primary 
+{
+    background-color: #128ff2;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
+    color: #fff;
+}
         
         td {
             background-color: aliceblue;
@@ -39,16 +46,56 @@
         
         a {
             text-decoration: none;
-            color: crimson;
+            color: white;
             border-radius: 5px;
             padding: 5px;
-            background-color: darkgray;
+            margin:"10px";
+           background-color: #128ff2;
         }
         
         nav {
             margin-top: 5%;
             margin-bottom: 10px;
         }
+        .btn
+        {
+        box-shadow: none;
+    	border: 1px solid transparent;
+   		font-size: 14px;
+   		background-color:#128ff2;
+   		color:white;
+    	outline: none;
+    	line-height: 100%;
+    	white-space: nowrap;
+    	vertical-align: middle;
+    	padding: 0.6rem 1rem;
+    	border-radius: 2px;
+    	transition: all 0.2s ease-in-out;
+    	cursor: pointer;
+    	min-height: 38px;
+        }
+        .searchBar{
+        border: 1px solid #128ff2;
+        box-shadow: none;
+        background-color: white;
+        color: black;
+        padding: 0.6rem 1rem;
+        transition: all 0.2s ease-in-out;
+        cursor: pointer;
+    	min-height: 38px;
+        }
+        .searchBar::active {
+        border: 1px solid transparent;
+        box-shadow: none;
+        background-color: white;
+        color: black;
+		}
+        .searchBar::selection {
+        border: 1px solid transparent;
+        box-shadow: none;
+        background-color: white;
+        color: black;
+		}
     </style>
     <script type="text/javascript">
         var found = "[[${teams}]]";
@@ -58,7 +105,7 @@
         }
 
         function search() {
-            if (found == "null") {
+            if (found == null) {
                 document.getElementById("nofound").innerText("NO found");
             }
         }
@@ -67,16 +114,18 @@
 
 <body>
     <div style="text-align: center;">
-        <h1 style="color: crimson;">IPL Dashboard</h1>
-        <nav><a href="add" th:href="@{/add}">Add Teams</a></nav>
+        <h1 style="color:#128ff2 ">IPL Dashboard</h1>
+        <nav><a href="add" th:href="@{/add}">Add Teams</a> <a href="upload" th:href="@{/upload}">Upload Files</a></nav>
     </div>
+    <center>
     <div>
         <form th:action="@{/}" method="POST">
-            <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" onclick="search()" required /> &nbsp;
-            <input type="submit" value="Search" /> &nbsp;
-            <input type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
+            <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" class="searchBar" onclick="search()" required /> &nbsp;
+            <input type="submit" value="Search" class="btn"/> &nbsp;
+            <input type="button" value="Clear" id="btnClear" class="btn" onclick="clearSearch()" />
         </form>
     </div>
+    </center>
     <div style="display: flex;justify-content: center;">
         <table>
             <tr>

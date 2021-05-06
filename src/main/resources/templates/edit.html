@@ -61,20 +61,6 @@
         }
     </style>
 </head>
-<script>
-    function check() {
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        const saved = urlParams.get('saved')
-        if (saved == "true") {
-            console.log(saved)
-            alert("saved")
-        } else {
-            alert("not saved")
-        }
-    }
-</script>
-
 <body>
     <form th:objects="${team}" th:action="@{/save}" method="GET" action="#">
         <table>
@@ -88,17 +74,18 @@
                 <th>Points</th>
             </tr>
             <tr>
-                <td><input type="text" name="teamId" th:value="${team.teamId}" placeholder="Team ID" required></td>
+                <td><input type="number" name="teamId" th:value="${team.teamId}" placeholder="Team ID" required></td>
                 <td><input type="text" name="teamName" th:value="${team.teamName}" placeholder="Team Name" required></td>
                 <td><input type="number" name="totalMatch" th:value="${team.totalMatch}" placeholder="Total Matches" required></td>
                 <td><input type="number" name="teamWin" th:value="${team.teamWin}" placeholder="Team Wins" required></td>
                 <td><input type="number" name="teamLoss" th:value="${team.teamLoss}" placeholder="Team Losses" required></td>
                 <td><input type="number" name="nrr" th:value="${team.nrr}" placeholder="Team NRR" required></td>
                 <td><input type="number" name="points" th:value="${team.points}" placeholder="Team Points" required></td>
-                <td><input type="submit" value="Add Team" onclick="check()"></td>
+                <td><input type="submit" value="Add Team"></td>
             </tr>
         </table>
     </form>
+    <h1 th:if="${}" th:text=*{saved}></h1>
 </body>
 
 </html>
