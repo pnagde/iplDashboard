@@ -1,43 +1,67 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-        <title>Spring Boot File Upload / Download Rest API Example</title>
-        <link rel="stylesheet" href="/main.css" />
-    </head>
-    <body>
-        <noscript>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Upload Files</title>
+    <link rel="stylesheet" href="/main.css" />
+</head>
+<style>
+    a {
+        margin-right: 5px;
+        margin-left: 5px;
+        padding: 16px;
+        text-decoration: none;
+    }
+    
+    a:hover {
+        margin-right: 5px;
+        margin-left: 5px;
+        background-color: #128ff2;
+        color: white;
+        transition: 0.5s;
+    }
+</style>
+
+<body>
+    <noscript>
             <h2>Sorry! Your browser doesn't support Javascript</h2>
         </noscript>
-        <div class="upload-container">
-            <div class="upload-header">
-                <h2>Spring Boot File Upload / Download Rest API Example</h2>
-            </div>
-            <div class="upload-content">
-                <div class="single-upload">
-                    <h3>Upload Single File</h3>
-                    <form id="singleUploadForm" name="singleUploadForm">
-                        <input id="singleFileUploadInput" type="file" name="file" class="file-input" required />
-                        <button type="submit" class="primary submit-btn">Submit</button>
-                    </form>
-                    <div class="upload-response">
-                        <div id="singleFileUploadError"></div>
-                        <div id="singleFileUploadSuccess"></div>
-                    </div>
+    <div class="upload-container">
+        <div class="upload-header" style="text-align: center;">
+            <h2>Upload Files</h2>
+        </div>
+        <div style="text-align: center;">
+            <h1 style="color:#128ff2;">IPL Dashboard</h1>
+            <nav><a href="index.html" th:href="@{/}">Dashboard</a> <a href="add" th:href="@{/add}">Add Teams</a><a href="allfiles.html" th:href="@{/allfiles}">show All Files</a></nav>
+        </div>
+        <div class="upload-content">
+            <div class="single-upload">
+                <h3>Upload Single File</h3>
+                <form id="singleUploadForm" name="singleUploadForm">
+                    <input id="singleFileUploadInput" type="file" name="file" class="file-input" required />
+                    <button type="submit" class="primary submit-btn">Submit</button>
+                </form>
+                <div class="upload-response">
+                    <progress id="progressBar" value="0" max="100" style="width:300px;"></progress>
+                    <div id="singleFileUploadError"></div>
+                    <div id="singleFileUploadSuccess"></div>
                 </div>
-                <div class="multiple-upload">
-                    <h3>Upload Multiple Files</h3>
-                    <form id="multipleUploadForm" name="multipleUploadForm">
-                        <input id="multipleFileUploadInput" type="file" name="files" class="file-input" multiple required />
-                        <button type="submit" class="primary submit-btn">Submit</button>
-                    </form>
-                    <div class="upload-response">
-                        <div id="multipleFileUploadError"></div>
-                        <div id="multipleFileUploadSuccess"></div>
-                    </div>
+            </div>
+            <div class="multiple-upload">
+                <h3>Upload Multiple Files</h3>
+                <form id="multipleUploadForm" name="multipleUploadForm">
+                    <input id="multipleFileUploadInput" type="file" name="files" class="file-input" multiple required />
+                    <button type="submit" class="primary submit-btn">Submit</button>
+                </form>
+                <div class="upload-response">
+                    <div id="multipleFileUploadError"></div>
+                    <div id="multipleFileUploadSuccess"></div>
                 </div>
             </div>
         </div>
-        <script src="/main.js" ></script>
-    </body>
+    </div>
+    <script src="/main.js"></script>
+</body>
+
 </html>

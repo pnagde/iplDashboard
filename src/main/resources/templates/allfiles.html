@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All files</title>
+    <link rel="stylesheet" href="../static/allfiles.css" />
+</head>
+<style>
+    .card {
+        display: flex;
+        justify-content: center;
+    }
+    
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    
+    th {
+        padding: 10px;
+        text-align: center;
+    }
+    
+    tr {
+        padding: 10px;
+        text-align: center;
+    }
+    
+    button.primary {
+        background-color: #128ff2;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
+        color: #fff;
+    }
+    
+    td {
+        background-color: aliceblue;
+        padding: 5px;
+    }
+    
+    table {
+        border: 2px;
+        border-color: black;
+        padding: 16px;
+        background-color: cornflowerblue;
+        border-style: dashed;
+        margin-top: 3%;
+    }
+    
+    a {
+        text-decoration: none;
+        color: #128ff2;
+        border-radius: 5px;
+        padding: 5px;
+        margin: "10px";
+        cursor: pointer;
+    }
+    
+    nav {
+        margin-top: 5%;
+        margin-bottom: 10px;
+    }
+    
+    .btn {
+        box-shadow: none;
+        border: 1px solid transparent;
+        font-size: 14px;
+        background-color: #128ff2;
+        color: white;
+        outline: none;
+        line-height: 100%;
+        white-space: nowrap;
+        vertical-align: middle;
+        padding: 0.6rem 1rem;
+        border-radius: 2px;
+        transition: all 0.2s ease-in-out;
+        cursor: pointer;
+        min-height: 38px;
+    }
+    
+    .linkBtn {
+        margin-right: 5px;
+        margin-left: 5px;
+        padding: 16px;
+        text-decoration: none;
+    }
+    
+    .linkBtn:hover {
+        margin-right: 5px;
+        margin-left: 5px;
+        background-color: #128ff2;
+        color: white;
+        transition: 0.5s;
+    }
+</style>
+
+<body>
+    <div style="text-align: center;">
+        <h1 style="color:#128ff2 ">IPL Dashboard</h1>
+        <nav><a href="index.html" th:href="@{/}" class="linkBtn">Dashboard</a><a href="add" th:href="@{/add}" class="linkBtn">Add Teams</a> <a class="linkBtn" href="upload" th:href="@{/upload}">Upload Files</a></nav>
+    </div>
+    <div class="card">
+        <table>
+            <tr>
+                <th>File Name</th>
+                <th>File Download Uri</th>
+                <th>File Type</th>
+                <th>Size</th>
+                <!-- <th colspan="2">Actions</th> -->
+            </tr>
+            <tr th:each="file:${files}">
+                <td th:text="${file.fileName}"></td>
+                <td>
+                    <a th:href="${file.fileDownloadUri}">download</a>
+                </td>
+                <td th:text="${file.fileType}"></td>
+                <td th:text="${file.size}"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

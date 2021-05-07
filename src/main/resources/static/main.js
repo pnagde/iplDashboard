@@ -9,6 +9,7 @@ var multipleUploadForm = document.querySelector('#multipleUploadForm');
 var multipleFileUploadInput = document.querySelector('#multipleFileUploadInput');
 var multipleFileUploadError = document.querySelector('#multipleFileUploadError');
 var multipleFileUploadSuccess = document.querySelector('#multipleFileUploadSuccess');
+var progress = document.getElementById("progressBar");
 
 function uploadSingleFile(file) {
     var formData = new FormData();
@@ -20,7 +21,7 @@ function uploadSingleFile(file) {
     xhr.onload = function() {
         console.log(xhr.responseText);
         var response = JSON.parse(xhr.responseText);
-        if(xhr.status == 200) {
+        if (xhr.status == 200) {
             singleFileUploadError.style.display = "none";
             singleFileUploadSuccess.innerHTML = "<p>File Uploaded Successfully.</p><p>DownloadUrl : <a href='" + response.fileDownloadUri + "' target='_blank'>" + response.fileDownloadUri + "</a></p>";
             singleFileUploadSuccess.style.display = "block";
@@ -35,7 +36,7 @@ function uploadSingleFile(file) {
 
 function uploadMultipleFiles(files) {
     var formData = new FormData();
-    for(var index = 0; index < files.length; index++) {
+    for (var index = 0; index < files.length; index++) {
         formData.append("files", files[index]);
     }
 
@@ -45,10 +46,10 @@ function uploadMultipleFiles(files) {
     xhr.onload = function() {
         console.log(xhr.responseText);
         var response = JSON.parse(xhr.responseText);
-        if(xhr.status == 200) {
+        if (xhr.status == 200) {
             multipleFileUploadError.style.display = "none";
             var content = "<p>All Files Uploaded Successfully</p>";
-            for(var i = 0; i < response.length; i++) {
+            for (var i = 0; i < response.length; i++) {
                 content += "<p>DownloadUrl : <a href='" + response[i].fileDownloadUri + "' target='_blank'>" + response[i].fileDownloadUri + "</a></p>";
             }
             multipleFileUploadSuccess.innerHTML = content;
@@ -63,20 +64,21 @@ function uploadMultipleFiles(files) {
 }
 
 
-singleUploadForm.addEventListener('submit', function(event){
+singleUploadForm.addEventListener('submit', function(event) {
     var files = singleFileUploadInput.files;
-    if(files.length === 0) {
+    if (files.length === 0) {
         singleFileUploadError.innerHTML = "Please select a file";
         singleFileUploadError.style.display = "block";
     }
+    progress.setAttribute("value", "100");
     uploadSingleFile(files[0]);
     event.preventDefault();
 }, true);
 
 
-multipleUploadForm.addEventListener('submit', function(event){
+multipleUploadForm.addEventListener('submit', function(event) {
     var files = multipleFileUploadInput.files;
-    if(files.length === 0) {
+    if (files.length === 0) {
         multipleFileUploadError.innerHTML = "Please select at least one file";
         multipleFileUploadError.style.display = "block";
     }

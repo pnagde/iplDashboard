@@ -32,8 +32,12 @@ body:before {
     clear: both;
 }
 
-
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     margin-top: 20px;
     margin-bottom: 20px;
 }
@@ -91,7 +95,6 @@ input[type="file"] {
     .file-input {
         width: calc(100% - 115px);
     }
-
     .submit-btn {
         display: inline-block;
         margin-top: 0;
@@ -100,15 +103,15 @@ input[type="file"] {
 }
 
 .upload-container {
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-      background-color: #fff;
-      box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
-      margin-top: 60px;
-      min-height: 400px;
-      position: relative;
-      padding: 20px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #fff;
+    box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
+    margin-top: 60px;
+    min-height: 400px;
+    position: relative;
+    padding: 20px;
 }
 
 .upload-header {

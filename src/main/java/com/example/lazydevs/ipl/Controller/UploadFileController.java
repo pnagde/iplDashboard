@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,9 +22,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.example.lazydevs.ipl.Repository.FileRepository;
 import com.example.lazydevs.ipl.Service.FileStorageService;
 import com.example.lazydevs.ipl.modal.UploadFileResponse;
 
@@ -34,6 +37,9 @@ public class UploadFileController {
 	
 	@Autowired
 	private final FileStorageService fileStorageService = null;
+
+	@Autowired
+	private FileRepository fileRepository;
 	
 	@PostMapping(value = "/uploadFiles")
 	public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
@@ -43,6 +49,8 @@ public class UploadFileController {
 		
 		System.out.println("called");
 		System.out.println(fileName+"/"+fileDownloadUri);
+		UploadFileResponse fp=new UploadFileResponse(fileName, fileDownloadUri, file.getContentType(), file.getSize());
+		fileRepository.save(fp);
 		return new UploadFileResponse(fileName,fileDownloadUri,file.getContentType(),file.getSize());
 	}
 	
@@ -83,20 +91,14 @@ public class UploadFileController {
 	                .body(file);
 	}
 	
-//	@GetMapping("/allfiles")
-//	public String handleFileUpload(@RequestParam("file") MultipartFile file,
-//			RedirectAttributes redirectAttributes) {
-//
-//		try {
-//			fileStorageService.storeFile(file);
-//		} catch (FileUploadException e) {
-//			e.printStackTrace();
-//		}
-//		redirectAttributes.addFlashAttribute("message",
-//				"You successfully uploaded " + file.getOriginalFilename() + "!");
-//
-//		return "redirect:/allfiles";
-//	}
+	@GetMapping("/allfiles")
+	public ModelAndView handleFileUpload(RedirectAttributes redirectAttributes) 
+	{
+		ModelAndView model=new ModelAndView("allfiles");
+        List<UploadFileResponse> files=(List<UploadFileResponse>)fileRepository.findAll();
+		model.addObject("files",files);
+		return model;
+	}
 
 
 }
