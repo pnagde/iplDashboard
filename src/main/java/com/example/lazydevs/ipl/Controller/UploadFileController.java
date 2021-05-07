@@ -46,9 +46,6 @@ public class UploadFileController {
 
 		String fileName=fileStorageService.storeFile(file);
 		String fileDownloadUri=ServletUriComponentsBuilder.fromCurrentContextPath().path("/downloadFile/").path(fileName).toUriString();
-		
-		System.out.println("called");
-		System.out.println(fileName+"/"+fileDownloadUri);
 		UploadFileResponse fp=new UploadFileResponse(fileName, fileDownloadUri, file.getContentType(), file.getSize());
 		fileRepository.save(fp);
 		return new UploadFileResponse(fileName,fileDownloadUri,file.getContentType(),file.getSize());

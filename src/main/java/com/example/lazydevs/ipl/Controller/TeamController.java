@@ -78,7 +78,7 @@ public class TeamController
     @RequestMapping(path = "/edit/{id}")
     public ModelAndView edit(@PathVariable(name = "id") Integer id ) {
         ModelAndView modelAndView=new ModelAndView("edit");
-        if(id>=0){
+        if(id>0){
             Team team=service.get(id);
             modelAndView.addObject("team",team);
         }
